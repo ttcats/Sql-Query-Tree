@@ -23,5 +23,5 @@ if __name__ == "__main__":
   #sql = "SELECT * FROM company;"
   #sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';"
   sql = "select * from company;"
-  postgre("10.7.250.106","admin","123","omdb",5432,sql)
+  postgre("192.168.1.2","admin","123","omdb",5432,sql)
 
