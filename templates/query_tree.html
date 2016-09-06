@@ -1,0 +1,181 @@
+{% extends "index.html" %}
+{% block title %}OMS{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+<script src="/static/js/bootstrap-treeview.js"></script>
+<script src="/static/js/querysql.js"></script>
+<link rel="stylesheet" href="/static/css/style.min.css" />
+<script src="/static/js/jstree.min.js"></script>
+
+<style type="text/css">
+table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;}
+
+th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;}
+th{font-weight:bold;background:#66CC99;}
+</style>
+
+
+
+
+
+{% endblock %}
+{% block content %}
+       <div class="row">
+            <div class="col-md-12">
+               <ul class="breadcrumb">
+                     <li><a href="#">Dashboard</a>
+                     </li>
+                     <li>Dbs</li>
+                     <li class="active">Query</li>
+               </ul>
+               <h1 class="h1">SQL QUERY</h1>
+            </div>
+       </div>
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body" >
+
+
+
+
+<div class="row">
+<div class="col-md-12"  style="height:3%"></div>
+</div>
+
+
+<div class="row" >
+<div class="col-md-10 col-md-offset-1" style="border-style:groove;border-bottom-style:none">
+<button type="button" onclick="submit()">Submit</button>
+</div>
+</div>
+
+<div class="row">
+
+<div class="col-md-2 col-md-offset-1" style="border-style:groove;border-right-style:none" >
+<p>Choose:
+    <select id="choosedb" onchange="choosedb(this.value)" > 
+      <option value=''>-----</option> 
+      {% for dbtype in dbtypes %}
+      <option value="{{ dbtype }}">{{ dbtype|capfirst }}</option> 
+      {% endfor %}
+      </select>
+</p>
+
+
+</div>
+
+<div class="col-md-8" style="border-style:groove;">
+<p>查询分析器</p>
+</div>
+
+</div>
+
+<div class="row">
+<div id="jstree_demo" class="col-md-2 col-md-offset-1" style="border-style:groove;height: 70%;border-top-style:none;border-right-style:none;padding-left:3%;overflow: auto">
+</div>
+
+<div class="col-md-8" style="border-style:groove;height: 70%;border-top-style:none">
+
+<div class="row">
+
+<div class="col-md-12" style="border-style:none;height: 50%;padding:0">
+<textarea  class="form-control" id="querysql" style="width: 100%;height: 100%;resize: none;background:transparent;" ></textarea>
+</div>
+
+<div class="col-md-12" style="border-style:groove;border-left-style:none;border-right-style:none;height: 6%">
+<p>结果</p>
+</div>
+
+<div class="col-md-12" id="textexport" style="border-style:none;height: 44%;overflow: auto;padding:0">
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+
+
+<script type="text/javascript">
+    function choosedb(s) {
+        if (s != '') {
+        $('#jstree_demo').jstree("destroy").jstree({
+            core: {
+                'data': {
+                    'url' : '/db/choose?dbs=' + s,
+                    "dataType": "json", 
+                    'data': function (node) {
+			select();
+                        return { 'id': node.id };
+                        }
+                    },
+                'force_text': true,
+                'check_callback': true
+                },
+        })
+         }else{
+       $('#jstree_demo').data('jstree', false).empty();
+}
+    };
+</script>
+
+
+
+<script>
+    var treeid = '';
+    var select = function(){
+    $('#jstree_demo').bind("activate_node.jstree", function (obj, e) {
+    var currentNode = e.node;
+    treeid = currentNode.id;
+    //alert(treeid);
+    });
+    }
+
+</script>
+
+
+
+
+
+<script type="text/javascript">
+   function submit() {
+   var text = document.getElementById("querysql").value;
+   var db = document.getElementById("choosedb").value;
+
+   //alert(treeid);
+   //alert(text);
+   if (treeid == '') {
+   alert("请选择数据库!");
+   }else if(text == ''){
+   alert("请输入SQL语句!");
+   }else{
+   $.ajax({type:"POST",
+           url:"/db/query_sql",
+           data:{treeid:treeid,text:text,db:db},
+           //async:false,
+           success:function(data) {
+                                 $("#textexport").html(data);     
+                           },
+
+           });
+   }
+}
+</script>
+
+
+
+{% endblock %}

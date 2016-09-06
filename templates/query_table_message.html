@@ -1,0 +1,99 @@
+{% extends "index.html" %}
+{% block title %}OMS{% endblock %}
+{% block css %}
+<!-- DataTables-->
+
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+
+<link rel="stylesheet" href="/static/css/bootstrap-table.min.css">
+<link rel="stylesheet" href="/static/css/bootstrap-table.css">
+<link rel="stylesheet" href="/static/css/bootstrap-editable.css">
+<script src="/static/js/bootstrap-table.min.js"></script>
+<script src="/static/js/bootstrap-table.js"></script>
+<script src="/static/js/bootstrap-editable.js"></script>
+<script src="/static/js/bootstrap-table-editable.js"></script>
+<script src="/static/js/bootstrap-table-zh-CN.min.js"></script>
+
+
+
+
+{% endblock %}
+{% block content %}
+       <div class="row">
+            <div class="col-md-12">
+               <ul class="breadcrumb">
+                     <li><a href="#">Dashboard</a>
+                     </li>
+                     <li>Dbs</li>
+                     <li class="active">Query</li>
+               </ul>
+               <h1 class="h1">SQL MESSAGES</h1>
+            </div>
+       </div>
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body" >
+
+
+
+
+
+
+
+<table id="table">
+    <thead>
+    <tr>
+        <th data-field="id" data-align="center" >ID</th>
+        <th data-field="user" data-align="center" >User</th>
+        <th data-field="db" data-align="center">DB</th>
+        <th data-field="database" data-align="center">Database</th>
+        <th data-field="sql" data-align="center">Sql</th>
+        <th data-field="ctime" data-align="center">Ctime</th>
+    </tr>
+    </thead>
+</table>
+
+
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+<script>
+$(function () {
+    $('#table').bootstrapTable({
+        search: true,
+        url: '/db/tables/',
+        sidePagination:'server',
+        pagination:"true",
+        showRefresh:"true",
+        pageSize:"20",
+        pageList:"[20, 50, 100]",
+        height:"700",
+        onEditableSave: function (field, row, oldValue, $el){
+            $.ajax({
+                type: "post",
+                url: "/db/tables/",
+                dataType: "json",
+                data: { strJson: JSON.stringify(row) },
+                success: function (data,status) {
+                    if ( status == "sucess" ){
+                        alert("sucess");
+                    }
+                 },
+                 error: function (){
+                     alert("Error");
+                 },
+});
+      }
+    });
+});
+</script>
+
+
+
+
+
+{% endblock %}

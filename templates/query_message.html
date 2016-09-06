@@ -1,0 +1,92 @@
+{% extends "index.html" %}
+{% block title %}OMS{% endblock %}
+{% block css %}
+<!-- DataTables-->
+<link rel="stylesheet" href="/static/plugins/dataTables/css/dataTables.css">
+
+<style type="text/css">
+table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;}
+
+th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:5px 15px;}
+th{font-weight:bold;background:#66CC99;}
+</style>
+
+
+
+
+
+{% endblock %}
+{% block content %}
+       <div class="row">
+            <div class="col-md-12">
+               <ul class="breadcrumb">
+                     <li><a href="#">Dashboard</a>
+                     </li>
+                     <li>Dbs</li>
+                     <li class="active">Query</li>
+               </ul>
+               <h1 class="h1">SQL MESSAGES</h1>
+            </div>
+       </div>
+
+       <div class="row">
+            <div class="col-md-12">
+                 <div class="panel panel-default">
+                      <div class="panel-body" >
+
+
+
+
+<table>
+<tr>
+  <th>id</th>
+  <th>user</th>
+  <th>db</th>
+  <th>database</th>
+  <th>sql</th>
+  <th>ctime</th>
+</tr>
+
+{% for contact in contacts %}
+  <tr>
+    <td>{{ contact.sql_id }}</td>
+    <td>{{ contact.sql_user }}</td>
+    <td>{{ contact.sql_dbtitle }}</td>
+    <td>{{ contact.sql_dbdataba }}</td>
+    <td>{{ contact.sql_info }}</td>
+    <td>{{ contact.sql_ctime|upper }}</td>
+  </tr>
+{% endfor %}
+
+</table>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+
+
+
+{% endblock %}
