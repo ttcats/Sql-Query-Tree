@@ -18,10 +18,8 @@
 安装
 1.django==1.10
      pip install django==1.10
-
 2.MySQL-python
      yum install MySQL-python
-
 3.psycopg2
      pip install psycopg2
 
