@@ -25,7 +25,7 @@
 
 
 配置(根据环境自行配置)：
-     settings.py 数据库信息
+     omdb/settings.py 数据库信息
 
 启动
 1.导入数据类型
