@@ -36,5 +36,5 @@
      python manage.py runserver 0.0.0.0:8000
 
 备注:
-  当前只有两个数据库类型,MySQL(脚本query/operation_mysql.py)和PostgreSQL(脚本query/operation_postgres.py)
+  当前只有两个数据库类型,MySQL(脚本query/operation_mysql.py)和PostgreSQL(脚本query/operation_postgres.py),首先安装有关数据库
   查询信息中搜索默认可查询user、db、database
