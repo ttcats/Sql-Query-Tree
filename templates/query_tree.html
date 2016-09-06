@@ -119,7 +119,7 @@ th{font-weight:bold;background:#66CC99;}
                     'url' : '/db/choose?dbs=' + s,
                     "dataType": "json", 
                     'data': function (node) {
-			select();
+			select();//重新绑定事件
                         return { 'id': node.id };
                         }
                     },
