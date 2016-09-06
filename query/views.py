@@ -73,6 +73,7 @@ def db_choose(request):
         print qu_dbtitles
         qu_dbtitles = list(set(qu_dbtitles))
         for qu_dbtitle in qu_dbtitles:
+            #_D_用以区分参数
             fid = dbtitle + '_D_' + qu_dbtitle
             t.append({"id":fid,"text":qu_dbtitle,"children":True,"icon":"/static/img/database.png"})
     # 打印相关表
@@ -102,7 +103,7 @@ def db_choose(request):
         fid_index = dbtitle + '_D_' + database + '_D_' + table + '_D_' +'index'
         t=[{"id":fid_field,"text":"field","children":True,"icon":"/static/img/field_index.png"},{"id":fid_index,"text":"index","children":False,"icon":"/static/img/field_index.png"}]
 
-    # 打印字段和索引属性
+    # 打印字段名
     elif len(tree_id) == 4:
         dbtitle = tree_id[0]
         database = tree_id[1]
@@ -118,8 +119,8 @@ def db_choose(request):
             sql = "SELECT column_name FROM information_schema.columns WHERE table_name = '%s';" % table
             comms = postgre(dbmessage.db_ip,dbmessage.db_user,dbmessage.db_passwd,database,dbmessage.db_port,sql)
             comms_list = [ x['column_name'] for x in comms]
-        elif info == 'index':
-            t.append({'ERROR':'NOT INDEX'})
+        #elif info == 'index':
+        #    t.append({'ERROR':'NOT INDEX'})
              
         for comm in comms_list:
             fid = dbtitle + '_D_' + database + '_D_' + table + '_D_' + info + '_D_' + comm
