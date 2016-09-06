@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponseRedirect,HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.serializers.json import DjangoJSONEncoder
-from django.shortcuts import render
+
 import json
 import os
 
