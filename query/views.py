@@ -190,7 +190,7 @@ def query_sql(request):
             
             return HttpResponse(table_html)
 
-
+#django的分页方法
 @login_required(login_url="/login/")
 def query_message(request):
     user = request.session.get('username', 'anybody')
