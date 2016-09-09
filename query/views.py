@@ -206,7 +206,7 @@ def query_message(request):
         contacts = paginator.page(paginator.num_pages)
     return render(request, 'query_message.html', {'contacts': contacts,'user':user})
 
-
+#bootstrap table 显示
 @login_required(login_url="/login/")
 def query_table_message(request):
     user = request.session.get('username', 'anybody')
