@@ -14,12 +14,10 @@ sys.setdefaultencoding('utf8')
 @login_required(login_url="/login/")
 def index(request):
     user = request.session.get('username', 'anybody')
-    print user,"index"
     return render_to_response('index.html',locals())
 
 @csrf_exempt
 def login(request):
-    print request.POST
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
