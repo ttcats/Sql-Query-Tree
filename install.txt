@@ -20,7 +20,8 @@
 2.MySQL-python
      yum install MySQL-python
 
-3.psycopg2(需要先安装python-devel)
+3.psycopg2
+     yum install postgresql-devel python-devel
      pip install psycopg2
 
 
@@ -36,6 +37,6 @@
      python manage.py runserver 0.0.0.0:8000
 
 备注:
-  当前只有两个数据库类型,MySQL(脚本query/operation_mysql.py)和PostgreSQL(脚本query/operation_postgres.py),首先安装有关数据库
+  当前只有两个数据库类型,MySQL(脚本query/operation_mysql.py)和PostgreSQL(脚本query/operation_postgres.py)
   查询信息中搜索默认可查询user、db、database
   查询树界面choose选项是根据Dbmessage中db_type字段获取设置
