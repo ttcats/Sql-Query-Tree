@@ -18,6 +18,7 @@
      pip install django==1.10
 
 2.MySQL-python
+     yum install mysql-devel
      pip install MySQL-python
 
 3.psycopg2
