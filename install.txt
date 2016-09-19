@@ -33,8 +33,10 @@
 1.导入数据类型(先创建数据库)
      python manage.py makemigrations
      python manage.py migrate
+     
 
 2.启动程序
+     python manage.py createsuperuser (创建登陆用户)
      python manage.py runserver 0.0.0.0:8000
 
 备注:
