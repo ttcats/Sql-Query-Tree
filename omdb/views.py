@@ -26,6 +26,8 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             request.session['username'] = username
+            request.session.get_expiry_age()
+            request.session.get_expire_at_browser_close()
             print request.session
             return HttpResponseRedirect('/db/query_tree/')
         else:

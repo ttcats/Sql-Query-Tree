@@ -78,6 +78,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'omdb.wsgi.application'
 
+# Session
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_COOKIE_AGE = 1200
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

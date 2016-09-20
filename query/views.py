@@ -38,7 +38,6 @@ def query_tree(request):
 @login_required(login_url="/login/")
 def db_choose(request):
     user = request.session.get('username', 'anybody')
-    print request.GET,user
     tree_id = request.GET['id'].split('_D_')
     dbs_id = request.GET['dbs']
     t=[] 
